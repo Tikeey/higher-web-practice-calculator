@@ -1,0 +1,6 @@
+﻿Machine time zone offset: UTC+5h
+F1 02:30 local on 16 June -> todaySpent=1000, dailyBudget=1111, todayRemaining=111
+F1 12:00 local on 16 June -> todaySpent=0, dailyBudget=1000, todayRemaining=1000
+F2 balance 0.3 after spending 0.1 = 0.19999999999999998; spending the remaining 0.2 is rejected by "amount > totalBalance": true
+F3 balance with income+expense = 300
+F3 balance after deleting the income = 0 (arithmetic value would be -200)

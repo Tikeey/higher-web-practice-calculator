@@ -1,0 +1,29 @@
+﻿
+> src\App.ts:10:		root.innerHTML = '';
+  src\App.ts:11:		return;
+> src\components\date-input.ts:60:	prevBtn.innerHTML =
+  src\components\date-input.ts:61:		'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" 
+stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+> src\components\date-input.ts:69:	nextBtn.innerHTML =
+  src\components\date-input.ts:70:		'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4L10 8L6 12" 
+stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+> src\components\date-input.ts:95:		grid.innerHTML = '';
+  src\components\date-input.ts:96:		const monthStart = startOfMonth(viewMonth);
+> src\components\period-select.ts:115:	chevron.innerHTML =
+  src\components\period-select.ts:116:		'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" 
+stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+> src\components\period-select.ts:158:		dropdown.innerHTML = '';
+  src\components\period-select.ts:159:
+> src\pages\edit-budget-page.ts:13:	root.innerHTML = '';
+  src\pages\edit-budget-page.ts:14:
+> src\pages\history-page.ts:7:	root.innerHTML = '';
+  src\pages\history-page.ts:8:
+> src\pages\history-page.ts:67:			deleteBtn.innerHTML =
+  src\pages\history-page.ts:68:				'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4L12 12M12 4L4 12" 
+stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+> src\pages\main-page.ts:245:	root.innerHTML = '';
+  src\pages\main-page.ts:246:
+> src\pages\start-page.ts:37:	root.innerHTML = '';
+  src\pages\start-page.ts:38:
+
+
