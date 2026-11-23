@@ -1,0 +1,52 @@
+﻿diff --git a/src/services/budget-calculator.ts b/src/services/budget-calculator.ts
+index 8e82c79..12d624b 100644
+--- a/src/services/budget-calculator.ts
++++ b/src/services/budget-calculator.ts
+@@ -16,23 +16,13 @@ function todayISO(): string {
+ 	return new Date().toISOString().slice(0, 10);
+ }
+ 
+-function sumExpenses(transactions: Transaction[]): number {
+-	return transactions.filter(t => t.type === 'expense').reduce((acc, t) => acc + t.amount, 0);
+-}
+-
+-function sumIncome(transactions: Transaction[]): number {
+-	return transactions.filter(t => t.type === 'income').reduce((acc, t) => acc + t.amount, 0);
+-}
+-
+-function sumIncomeOnDate(transactions: Transaction[], dateISO: string): number {
+-	return transactions
+-		.filter(t => t.type === 'income' && t.date.slice(0, 10) === dateISO)
+-		.reduce((acc, t) => acc + t.amount, 0);
+-}
+-
+-function sumExpensesOnDate(transactions: Transaction[], dateISO: string): number {
++function sumAmount(
++	transactions: Transaction[],
++	type: Transaction['type'],
++	dateISO?: string,
++): number {
+ 	return transactions
+-		.filter(t => t.type === 'expense' && t.date.slice(0, 10) === dateISO)
++		.filter(t => t.type === type && (dateISO === undefined || t.date.slice(0, 10) === dateISO))
+ 		.reduce((acc, t) => acc + t.amount, 0);
+ }
+ 
+@@ -53,13 +43,13 @@ export function calculateMetrics(budget: Budget, transactions: Transaction[]): B
+ 	const daysRemainingRaw = differenceInCalendarDays(end, today) + 1;
+ 	const daysRemaining = Math.max(daysRemainingRaw, 0);
+ 
+-	const totalSpent = sumExpenses(transactions);
+-	const totalIncome = sumIncome(transactions);
++	const totalSpent = sumAmount(transactions, 'expense');
++	const totalIncome = sumAmount(transactions, 'income');
+ 	const totalBalance = Math.max(budget.initialBalance + totalIncome - totalSpent, 0);
+ 
+ 	const todayKey = todayISO();
+-	const todaySpent = sumExpensesOnDate(transactions, todayKey);
+-	const todayIncome = sumIncomeOnDate(transactions, todayKey);
++	const todaySpent = sumAmount(transactions, 'expense', todayKey);
++	const todayIncome = sumAmount(transactions, 'income', todayKey);
+ 
+ 	const balanceExTodayIncome = Math.max(
+ 		budget.initialBalance + (totalIncome - todayIncome) - totalSpent,
