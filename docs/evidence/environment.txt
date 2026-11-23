@@ -1,0 +1,6 @@
+﻿date: 2026-11-23T14:56:26
+os: Microsoft Windows NT 10.0.26300.0
+git: git version 2.56.1.windows.1
+node: v26.13.1
+npm: 11.20.0
+core.autocrlf: true
