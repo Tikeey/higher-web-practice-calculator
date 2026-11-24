@@ -71,6 +71,8 @@ The repository stores LF (`prettier.config.js`: `endOfLine: 'lf'`). On Windows w
 - Tests use Vitest; run them with `npm test`. Test files live next to the code as `*.test.ts`.
 - Every change in `src/services/` or in validation must come with a new or updated test. Run `npm test`, `npm run type-check` and `npm run build` before finishing; `npm run lint` must report 0 errors.
 - Some tests are marked "current behaviour": they pin down existing behaviour (for example, a negative balance is clamped to 0). If you change that behaviour on purpose, update the test and say so in the commit message.
+- `vitest.config.ts` forces the time zone to `Asia/Almaty` (UTC+5) so date-dependent behaviour is reproducible on any machine; do not remove it. Use fake timers for `Date` and mock `src/utils/db.ts` when testing `state.ts`.
+- Money is handled in integer cents inside `calculateMetrics`; never compare or sum decimal amounts with plain floating-point arithmetic.
 - Never claim a command passed unless it was actually run; report the exact command and its result.
 
 ## Review gates
