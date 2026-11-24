@@ -1,0 +1,180 @@
+
+> test
+> vitest run
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.1 [39m[90mC:/Users/Тимур/Desktop/Semester_5/Software Engineering/Week_12/project/higher-web-practice-calculator[39m
+
+ [32m✓[39m src/utils/validation.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/models/schemas.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/services/budget-calculator.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [31m❯[39m src/services/budget-calculator.regression.test.ts [2m([22m[2m6 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 11[2mms[22m[39m
+   [32m✓[39m test environment [2m(1)[22m
+     [32m✓[39m runs in UTC+5 (set in vitest.config.ts)[32m 1[2mms[22m[39m
+   [32m✓[39m F1: days are local calendar days, not UTC days [2m(3)[22m
+     [32m✓[39m does not count yesterday's afternoon expense as today's after local midnight[32m 3[2mms[22m[39m
+     [32m✓[39m counts an expense made at 01:00 local time as spent today[32m 0[2mms[22m[39m
+     [32m✓[39m does not throw on a malformed transaction date[32m 0[2mms[22m[39m
+   [31m❯[39m F2: money arithmetic is exact to the cent [2m(2)[22m
+[31m     [31m×[31m 0.3 minus 0.1 leaves exactly 0.2[39m[32m 5[2mms[22m[39m
+[31m     [31m×[31m 0.1 plus 0.2 of expenses totals exactly 0.3[39m[32m 1[2mms[22m[39m
+ [31m❯[39m src/utils/state.test.ts [2m([22m[2m3 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 33[2mms[22m[39m
+   [31m❯[39m addTransaction balance check (F2) [2m(3)[22m
+[31m     [31m×[31m accepts spending exactly the remaining decimal balance[39m[32m 10[2mms[22m[39m
+[31m     [31m×[31m accepts spending exactly what is left for every cent amount in a range[39m[32m 21[2mms[22m[39m
+     [32m✓[39m still rejects spending one cent more than the balance[32m 1[2mms[22m[39m
+ [32m✓[39m src/utils/format.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 4 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/services/budget-calculator.regression.test.ts[2m > [22mF2: money arithmetic is exact to the cent[2m > [22m0.3 minus 0.1 leaves exactly 0.2
+[31m[1mAssertionError[22m: expected 0.19999999999999998 to be 0.2 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 0.2[39m
+[31m+ 0.19999999999999998[39m
+
+[36m [2m❯[22m src/services/budget-calculator.regression.test.ts:[2m86:26[22m[39m
+    [90m 84|[39m   ])[33m;[39m
+    [90m 85|[39m
+    [90m 86|[39m   [34mexpect[39m(m[33m.[39mtotalBalance)[33m.[39m[34mtoBe[39m([34m0.2[39m)[33m;[39m
+    [90m   |[39m                          [31m^[39m
+    [90m 87|[39m  })[33m;[39m
+    [90m 88|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/services/budget-calculator.regression.test.ts[2m > [22mF2: money arithmetic is exact to the cent[2m > [22m0.1 plus 0.2 of expenses totals exactly 0.3
+[31m[1mAssertionError[22m: expected 0.30000000000000004 to be 0.3 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 0.3[39m
+[31m+ 0.30000000000000004[39m
+
+[36m [2m❯[22m src/services/budget-calculator.regression.test.ts:[2m95:24[22m[39m
+    [90m 93|[39m   ])[33m;[39m
+    [90m 94|[39m
+    [90m 95|[39m   [34mexpect[39m(m[33m.[39mtotalSpent)[33m.[39m[34mtoBe[39m([34m0.3[39m)[33m;[39m
+    [90m   |[39m                        [31m^[39m
+    [90m 96|[39m   [34mexpect[39m(m[33m.[39mtotalBalance)[33m.[39m[34mtoBe[39m([34m4.7[39m)[33m;[39m
+    [90m 97|[39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/utils/state.test.ts[2m > [22maddTransaction balance check (F2)[2m > [22maccepts spending exactly the remaining decimal balance
+[31m[1mAssertionError[22m: promise rejected "Error: Сумма превышает остаток баланса" instead of resolving[39m
+[36m [2m❯[22m src/utils/state.test.ts:[2m46:49[22m[39m
+    [90m 44|[39m   [35mawait[39m [34maddTransaction[39m([34mexpense[39m([32m'a'[39m[33m,[39m [34m0.1[39m))[33m;[39m
+    [90m 45|[39m
+    [90m 46|[39m   await expect(addTransaction(expense('b', 0.2))).resolves.toBeUndefin…
+    [90m   |[39m                                                 [31m^[39m
+    [90m 47|[39m  })[33m;[39m
+    [90m 48|[39m
+
+[31m[1mCaused by: Error[22m: Сумма превышает остаток баланса[39m
+[36m [2m❯[22m Module.addTransaction src/utils/state.ts:[2m91:11[22m[39m
+[90m [2m❯[22m src/utils/state.test.ts:[2m46:16[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/utils/state.test.ts[2m > [22maddTransaction balance check (F2)[2m > [22maccepts spending exactly what is left for every cent amount in a range
+[31m[1mAssertionError[22m: expected [ 101, 102, 113, 114, 115, 116, …(64) ] to deeply equal [][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- [][39m
+[31m+ [[39m
+[31m+   101,[39m
+[31m+   102,[39m
+[31m+   113,[39m
+[31m+   114,[39m
+[31m+   115,[39m
+[31m+   116,[39m
+[31m+   117,[39m
+[31m+   118,[39m
+[31m+   119,[39m
+[31m+   120,[39m
+[31m+   121,[39m
+[31m+   138,[39m
+[31m+   139,[39m
+[31m+   163,[39m
+[31m+   164,[39m
+[31m+   165,[39m
+[31m+   166,[39m
+[31m+   167,[39m
+[31m+   168,[39m
+[31m+   188,[39m
+[31m+   189,[39m
+[31m+   191,[39m
+[31m+   192,[39m
+[31m+   194,[39m
+[31m+   195,[39m
+[31m+   197,[39m
+[31m+   198,[39m
+[31m+   200,[39m
+[31m+   201,[39m
+[31m+   203,[39m
+[31m+   204,[39m
+[31m+   205,[39m
+[31m+   226,[39m
+[31m+   228,[39m
+[31m+   230,[39m
+[31m+   232,[39m
+[31m+   234,[39m
+[31m+   236,[39m
+[31m+   238,[39m
+[31m+   240,[39m
+[31m+   242,[39m
+[31m+   251,[39m
+[31m+   255,[39m
+[31m+   257,[39m
+[31m+   261,[39m
+[31m+   263,[39m
+[31m+   267,[39m
+[31m+   269,[39m
+[31m+   273,[39m
+[31m+   275,[39m
+[31m+   276,[39m
+[31m+   278,[39m
+[31m+   279,[39m
+[31m+   280,[39m
+[31m+   303,[39m
+[31m+   309,[39m
+[31m+   315,[39m
+[31m+   321,[39m
+[31m+   326,[39m
+[31m+   327,[39m
+[31m+   328,[39m
+[31m+   330,[39m
+[31m+   332,[39m
+[31m+   333,[39m
+[31m+   334,[39m
+[31m+   336,[39m
+[31m+   378,[39m
+[31m+   384,[39m
+[31m+   390,[39m
+[31m+   396,[39m
+[31m+ ][39m
+
+[36m [2m❯[22m src/utils/state.test.ts:[2m64:20[22m[39m
+    [90m 62|[39m   }
+    [90m 63|[39m
+    [90m 64|[39m   [34mexpect[39m(rejected)[33m.[39m[34mtoEqual[39m([])[33m;[39m
+    [90m   |[39m                    [31m^[39m
+    [90m 65|[39m  })[33m;[39m
+    [90m 66|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m4 passed[39m[22m[90m (6)[39m
+[2m      Tests [22m [1m[31m4 failed[39m[22m[2m | [22m[1m[32m27 passed[39m[22m[90m (31)[39m
+[2m   Start at [22m 11:11:18
+[2m   Duration [22m 2.16s[2m (import 97%, transform 2%, tests 1%, worker 1%)[22m
+
+exit code: 1

@@ -1,0 +1,93 @@
+﻿diff --git a/src/pages/history-page.ts b/src/pages/history-page.ts
+index c801d59..a0f1092 100644
+--- a/src/pages/history-page.ts
++++ b/src/pages/history-page.ts
+@@ -55,7 +55,7 @@ export function renderHistoryPage(root: HTMLElement): void {
+ 
+ 			const date = document.createElement('span');
+ 			date.className = tw('text-sm text-text-secondary');
+-			date.textContent = formatDate(tx.date.slice(0, 10));
++			date.textContent = formatDate(tx.date);
+ 			right.appendChild(date);
+ 
+ 			const deleteBtn = document.createElement('button');
+diff --git a/src/pages/main-page.ts b/src/pages/main-page.ts
+index 4479f3a..dcdab65 100644
+--- a/src/pages/main-page.ts
++++ b/src/pages/main-page.ts
+@@ -52,7 +52,7 @@ function renderHistoryPreview(
+ 			amountEl.textContent = `${tx.type === 'income' ? '+' : ''}${formatMoney(tx.amount)}`;
+ 			const date = document.createElement('span');
+ 			date.className = tw('text-sm text-text-secondary');
+-			date.textContent = formatDate(tx.date.slice(0, 10));
++			date.textContent = formatDate(tx.date);
+ 			li.appendChild(amountEl);
+ 			li.appendChild(date);
+ 			list.appendChild(li);
+diff --git a/src/services/budget-calculator.ts b/src/services/budget-calculator.ts
+index 12d624b..8854172 100644
+--- a/src/services/budget-calculator.ts
++++ b/src/services/budget-calculator.ts
+@@ -1,4 +1,4 @@
+-import { differenceInCalendarDays, parseISO, startOfDay } from 'date-fns';
++import { differenceInCalendarDays, format, isValid, parseISO, startOfDay } from 'date-fns';
+ 
+ import type { Budget, Transaction } from '../models/schemas';
+ 
+@@ -12,8 +12,18 @@ export interface BudgetMetrics {
+ 	totalSpent: number;
+ }
+ 
+-function todayISO(): string {
+-	return new Date().toISOString().slice(0, 10);
++const DAY_KEY_FORMAT = 'yyyy-MM-dd';
++
++// Calendar day in the user's local time zone, e.g. '2026-06-16'.
++function localDayKey(date: Date): string {
++	return format(date, DAY_KEY_FORMAT);
++}
++
++// Transactions are stored as UTC timestamps, so the stored text cannot be cut to a date directly:
++// it has to be converted to the local calendar day first.
++function transactionDayKey(t: Transaction): string {
++	const parsed = parseISO(t.date);
++	return isValid(parsed) ? localDayKey(parsed) : t.date.slice(0, 10);
+ }
+ 
+ function sumAmount(
+@@ -22,7 +32,7 @@ function sumAmount(
+ 	dateISO?: string,
+ ): number {
+ 	return transactions
+-		.filter(t => t.type === type && (dateISO === undefined || t.date.slice(0, 10) === dateISO))
++		.filter(t => t.type === type && (dateISO === undefined || transactionDayKey(t) === dateISO))
+ 		.reduce((acc, t) => acc + t.amount, 0);
+ }
+ 
+@@ -30,14 +40,15 @@ function countSpendingDays(transactions: Transaction[]): number {
+ 	const dates = new Set<string>();
+ 	for (const t of transactions) {
+ 		if (t.type === 'expense') {
+-			dates.add(t.date.slice(0, 10));
++			dates.add(transactionDayKey(t));
+ 		}
+ 	}
+ 	return dates.size;
+ }
+ 
+ export function calculateMetrics(budget: Budget, transactions: Transaction[]): BudgetMetrics {
+-	const today = startOfDay(new Date());
++	const now = new Date();
++	const today = startOfDay(now);
+ 	const end = startOfDay(parseISO(budget.endDate));
+ 
+ 	const daysRemainingRaw = differenceInCalendarDays(end, today) + 1;
+@@ -47,7 +58,7 @@ export function calculateMetrics(budget: Budget, transactions: Transaction[]): B
+ 	const totalIncome = sumAmount(transactions, 'income');
+ 	const totalBalance = Math.max(budget.initialBalance + totalIncome - totalSpent, 0);
+ 
+-	const todayKey = todayISO();
++	const todayKey = localDayKey(now);
+ 	const todaySpent = sumAmount(transactions, 'expense', todayKey);
+ 	const todayIncome = sumAmount(transactions, 'income', todayKey);
+ 

@@ -1,0 +1,27 @@
+
+> format:check
+> prettier --check "src/**/*.{js,ts,json,css,html}"
+
+Checking formatting...
+[[33mwarn[39m] src/App.ts
+[[33mwarn[39m] src/components/date-input.ts
+[[33mwarn[39m] src/components/input.ts
+[[33mwarn[39m] src/components/period-select.ts
+[[33mwarn[39m] src/main.ts
+[[33mwarn[39m] src/models/schemas.ts
+[[33mwarn[39m] src/pages/edit-budget-page.ts
+[[33mwarn[39m] src/pages/history-page.ts
+[[33mwarn[39m] src/pages/main-page.ts
+[[33mwarn[39m] src/pages/start-page.ts
+[[33mwarn[39m] src/services/budget-calculator.regression.test.ts
+[[33mwarn[39m] src/services/budget-calculator.ts
+[[33mwarn[39m] src/styles.css
+[[33mwarn[39m] src/utils/db.ts
+[[33mwarn[39m] src/utils/format.test.ts
+[[33mwarn[39m] src/utils/format.ts
+[[33mwarn[39m] src/utils/state.test.ts
+[[33mwarn[39m] src/utils/state.ts
+[[33mwarn[39m] src/utils/tw.ts
+[[33mwarn[39m] src/utils/validation.ts
+[[33mwarn[39m] Code style issues found in 20 files. Run Prettier with --write to fix.
+exit code: 1

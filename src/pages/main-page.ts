@@ -52,7 +52,7 @@ function renderHistoryPreview(
 			amountEl.textContent = `${tx.type === 'income' ? '+' : ''}${formatMoney(tx.amount)}`;
 			const date = document.createElement('span');
 			date.className = tw('text-sm text-text-secondary');
-			date.textContent = formatDate(tx.date.slice(0, 10));
+			date.textContent = formatDate(tx.date);
 			li.appendChild(amountEl);
 			li.appendChild(date);
 			list.appendChild(li);

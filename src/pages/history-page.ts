@@ -55,7 +55,7 @@ export function renderHistoryPage(root: HTMLElement): void {
 
 			const date = document.createElement('span');
 			date.className = tw('text-sm text-text-secondary');
-			date.textContent = formatDate(tx.date.slice(0, 10));
+			date.textContent = formatDate(tx.date);
 			right.appendChild(date);
 
 			const deleteBtn = document.createElement('button');
